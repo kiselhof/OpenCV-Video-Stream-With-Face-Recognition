@@ -6,6 +6,13 @@ import pafy as pafy
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
+VARIABLE = 1
+
+def changeState(value):
+    global VARIABLE
+    VARIABLE = value
+    print('qwertyuio'+str(VARIABLE))
+
 
 class VideoCamera(object):
     def __init__(self):
@@ -21,13 +28,20 @@ class VideoCamera(object):
         self.video.release()
     
     def get_frame(self):
+        print (str(VARIABLE) + '=================================')
         success, image = self.video.read()
         # We are using Motion JPEG, but OpenCV defaults to capture raw images,
         # so we must encode it into JPEG in order to correctly display the
         # video stream.
         faces = face_cascade.detectMultiScale(image, 1.3, 5)
+
+        color = 0
+        if VARIABLE == 1488:
+            color = 255
+
         for (x, y, w, h) in faces:
-            cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, color), 2)
+
         ret, jpeg = cv2.imencode('.jpg', image)
         return jpeg.tobytes()
 

@@ -9,7 +9,7 @@
 # 2. Run "python main.py".
 # 3. Navigate the browser to the local webpage.
 from flask import Flask, render_template, Response
-from camera import VideoCamera
+from camera import VideoCamera, changeState
 
 app = Flask(__name__)
 
@@ -27,6 +27,17 @@ def gen(camera):
 def video_feed():
     return Response(gen(VideoCamera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/changeFirstButtonState')
+def changeFirstButtonState():
+    changeState(1488)
+    return Response()
+
+@app.route('/changeSecondButtonState')
+def changeSecondButtonState():
+    changeState(0)
+    return Response()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)

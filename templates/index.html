@@ -1,14 +1,15 @@
 <html>
   <head>
     <title>Video Streaming Demonstration</title>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <h1>Video Streaming Demonstration</h1>
     <img id="bg" src="{{ url_for('video_feed') }}">
     <p style="text-align: left">
         <button>Anonymize face</button>
-        <input type="button" onclick="anonymize_face_simple()" value="Anonymize face" /input>
-        <button>Something else</button>
+        <input id="firstButton" type="button"  value="Anonymize face"/>
+        <button id="secondButton">Something else</button>
         <button>Laser eyes</button>
     </p>
     <p style="text-align: left">
@@ -17,4 +18,35 @@
         <button>Record</button>
     </p>
   </body>
+  <script>
+//const axios = require('axios');
+
+let firstButton = document.getElementById('firstButton');
+let secondButton = document.getElementById('secondButton');
+
+firstButton.onclick = function () {
+    axios.get('/changeFirstButtonState')
+      .then(function (response) {
+          console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+      });
+}
+
+secondButton.onclick = function () {
+    axios.get('/changeSecondButtonState')
+      .then(function (response) {
+          console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+      });
+}
+
+</script>
 </html>
