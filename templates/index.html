@@ -5,5 +5,16 @@
   <body>
     <h1>Video Streaming Demonstration</h1>
     <img id="bg" src="{{ url_for('video_feed') }}">
+    <p style="text-align: left">
+        <button>Anonymize face</button>
+        <input type="button" onclick="anonymize_face_simple()" value="Anonymize face" /input>
+        <button>Something else</button>
+        <button>Laser eyes</button>
+    </p>
+    <p style="text-align: left">
+        <button>Cancel effects</button>
+        <button>Screenshot</button>
+        <button>Record</button>
+    </p>
   </body>
 </html>
