@@ -11,7 +11,7 @@ VARIABLE = 1
 def changeState(value):
     global VARIABLE
     VARIABLE = value
-    print('qwertyuio'+str(VARIABLE))
+    # print('qwertyuio'+str(VARIABLE))
 
 
 class VideoCamera(object):
@@ -28,7 +28,7 @@ class VideoCamera(object):
         self.video.release()
     
     def get_frame(self):
-        print (str(VARIABLE) + '=================================')
+        # print (str(VARIABLE) + '=================================')
         success, image = self.video.read()
         # We are using Motion JPEG, but OpenCV defaults to capture raw images,
         # so we must encode it into JPEG in order to correctly display the
@@ -61,13 +61,3 @@ class VideoCamera(object):
         # apply a Gaussian blur to the input image using our computed
         # kernel size
         return cv2.GaussianBlur(image, (kW, kH), 0, dst=image)
-
-    def add_audio(self):
-        video = pafy.new('https://www.youtube.com/watch?v=jr47YisIsz8&ab_channel=DuaLipa')
-        stream = video.getbest(preftype='mp4')
-
-        video = VideoFileClip(stream.url)
-        audio = video.audio
-        for t, video_frame in video.iter_frames(with_times=True):
-            audio_frame = audio.get_frame(t)
-
