@@ -4,7 +4,7 @@ import mpy as mpy
 from moviepy.editor import *
 import pafy as pafy
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier(r'D:\Ann\3_season\web-prog\OpenCV-Video-Stream-With-Face-Recognition\haarcascade_frontalface_default.xml')
 
 VARIABLE = 1
 
@@ -37,7 +37,7 @@ class VideoCamera(object):
 
         color = 0
         if VARIABLE == 1488:
-            color = 255
+            self.anonymize_face_simple(image)
 
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, color), 2)

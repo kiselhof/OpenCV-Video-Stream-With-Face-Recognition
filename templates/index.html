@@ -7,13 +7,12 @@
     <h1>Video Streaming Demonstration</h1>
     <img id="bg" src="{{ url_for('video_feed') }}">
     <p style="text-align: left">
-        <button>Anonymize face</button>
         <input id="firstButton" type="button"  value="Anonymize face"/>
         <button id="secondButton">Something else</button>
-        <button>Laser eyes</button>
+        <button id="thirdButton">Laser eyes</button>
     </p>
     <p style="text-align: left">
-        <button>Cancel effects</button>
+        <button id="cancelButton">Cancel effects</button>
         <button>Screenshot</button>
         <button>Record</button>
     </p>
@@ -23,6 +22,7 @@
 
 let firstButton = document.getElementById('firstButton');
 let secondButton = document.getElementById('secondButton');
+let cancelButton = document.getElementById('cancelButton');
 
 firstButton.onclick = function () {
     axios.get('/changeFirstButtonState')
