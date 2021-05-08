@@ -13,7 +13,7 @@
     </p>
     <p style="text-align: left">
         <button id="cancelButton">Cancel effects</button>
-        <button>Screenshot</button>
+        <a id="screenshotButton" target="_blank" onclick="window.open('/changeScreenshotButtonState', '_blank').focus(); setTimeout(function(){ location.reload(); }, 3000);">Screenshot</a>
         <button>Record</button>
     </p>
   </body>
@@ -23,6 +23,7 @@
 let firstButton = document.getElementById('firstButton');
 let secondButton = document.getElementById('secondButton');
 let cancelButton = document.getElementById('cancelButton');
+let screenshotButton = document.getElementById('screenshotButton');
 
 firstButton.onclick = function () {
     axios.get('/changeFirstButtonState')
@@ -38,6 +39,18 @@ firstButton.onclick = function () {
 
 secondButton.onclick = function () {
     axios.get('/changeSecondButtonState')
+      .then(function (response) {
+          console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+      });
+}
+
+cancelButton.onclick = function () {
+    axios.get('/changeCancelButtonState')
       .then(function (response) {
           console.log(response);
       })

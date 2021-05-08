@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 import cv2
-import mpy as mpy
-from moviepy.editor import *
-import pafy as pafy
 
 face_cascade = cv2.CascadeClassifier(r'D:\Ann\3_season\web-prog\OpenCV-Video-Stream-With-Face-Recognition\haarcascade_frontalface_default.xml')
 
@@ -37,10 +34,16 @@ class VideoCamera(object):
 
         color = 0
         if VARIABLE == 1488:
-            self.anonymize_face_simple(image)
+            for (x, y, w, h) in faces:
+                self.anonymize_face_simple(image[y:y+h, x:x+w])
 
-        for (x, y, w, h) in faces:
-            cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, color), 2)
+        if VARIABLE == 0:
+            for (x, y, w, h) in faces:
+                cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, color), 2)
+
+        if VARIABLE == 1:
+            for (x, y, w, h) in faces:
+                pass
 
         ret, jpeg = cv2.imencode('.jpg', image)
         return jpeg.tobytes()
@@ -48,7 +51,7 @@ class VideoCamera(object):
     def anonymize_face_simple(self, image, factor=3.0):
         # automatically determine the size of the blurring kernel based
         # on the spatial dimensions of the input image
-        #to extract ROI
+        # to extract ROI
         (h, w) = image.shape[:2]
         kW = int(w / factor)
         kH = int(h / factor)
